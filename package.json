@@ -1,0 +1,26 @@
+{
+  "name": "timeline",
+  "version": "1.0.0",
+  "description": "Edit Timeline Faster",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:1c7/timeline.git"
+  },
+  "keywords": [
+    "timeline",
+    "subtitle"
+  ],
+  "author": "Cheng Zheng (guokrfans@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/1c7/timeline/issues"
+  },
+  "homepage": "https://github.com/1c7/timeline#readme",
+  "devDependencies": {
+    "electron": "^5.0.0-beta.8"
+  }
+}
