@@ -24,6 +24,9 @@
     "electron": "^5.0.0-beta.8"
   },
   "dependencies": {
-    "electron-reload": "^1.4.0"
+    "ass-parser": "^0.2.0",
+    "electron-reload": "^1.4.0",
+    "subtitle": "^2.0.3",
+    "subtitles-parser": "0.0.2"
   }
 }
