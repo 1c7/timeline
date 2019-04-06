@@ -6,8 +6,20 @@
   </head>
   <body>
     <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <script>document.write(process.versions.node)</script>
+    <div id="open-file">
+      选择文件
+    </div>
+    <style>
+      #open-file{
+        width: 200px;
+        height: 180px;
+        background: #f96;
+        cursor: pointer;
+      }
+    </style>
+    <script>
+      require('./renderer.js')
+    </script>
   </body>
 </html>

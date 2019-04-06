@@ -22,5 +22,8 @@
   "homepage": "https://github.com/1c7/timeline#readme",
   "devDependencies": {
     "electron": "^5.0.0-beta.8"
+  },
+  "dependencies": {
+    "electron-reload": "^1.4.0"
   }
 }
