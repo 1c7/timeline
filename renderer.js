@@ -2,21 +2,32 @@ const { shell } = require('electron')
 const { dialog } = require('electron').remote
 const os = require('os')
 
-const file = document.getElementById('open-file')
-file.addEventListener('click', (event) => {
-  console.log(os.homedir())
-  var path = os.homedir() + '/Desktop/'
-  // shell.openItem(path)
-  // 这个只是打开一个目录而已，不是选择文件
 
-  // 打开文件
-  // dialog.showOpenDialog({ properties: ['openFile', 'openDirectory', 'multiSelections'] }, (filename)=>{
-  dialog.showOpenDialog({
-    properties: ['openFile'],
-    filters: [
-      { name: 'Movies', extensions: ['mkv', 'avi', 'mp4'] }
-    ]
-  }, (filename) => {
-    console.log(filename[0])
-  })
+var app = new Vue({
+  el: '#container',
+  data: {
+    a: 1,
+    show_video: false,
+    files: null,
+    video_src: null,
+  },
+  created: function () {
+    console.log('a is: ' + this.a)
+  },
+  methods: {
+    choose() {
+      if (this.video_src == null) {
+        var inputNode = document.querySelector('input')
+        inputNode.click();
+      }
+    },
+    change() {
+      this.files = this.$refs.myFiles.files
+      var file = this.files[0]
+      var URL = window.URL || window.webkitURL
+      var fileURL = URL.createObjectURL(file)
+      this.video_src = fileURL
+      this.show_video = true
+    },
+  }
 })

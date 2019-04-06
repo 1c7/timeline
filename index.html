@@ -1,25 +1,75 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    <script>document.write(process.versions.node)</script>
-    <div id="open-file">
-      选择文件
+
+<head>
+  <meta charset="UTF-8">
+  <title>时间轴小助手</title>
+  <link rel="stylesheet" href="./css/normalize.css">
+  <script src="./js/vue-2.6.10.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="left">
+      <div id='video_area' v-on:click='choose'>
+        <input type="file" style='display: none;' v-on:input='change' ref="myFiles" />
+        <video controls autoplay id='video' :src='video_src' v-if="show_video"></video>
+      </div>
     </div>
-    <style>
-      #open-file{
-        width: 200px;
-        height: 180px;
-        background: #f96;
-        cursor: pointer;
-      }
-    </style>
-    <script>
-      require('./renderer.js')
-    </script>
-  </body>
+    <div id="right">
+      {{a}}{{show_video}}
+    </div>
+  </div>
+  <style>
+    html {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      height: 100%;
+      width: 100%;
+    }
+
+    #open-file {
+      width: 200px;
+      height: 180px;
+      background: #f96;
+      cursor: pointer;
+    }
+
+    #container {
+      display: flex;
+      height: 100%;
+      width: 100%;
+    }
+
+    #left {
+      width: 50%;
+      height: 100%;
+      background: #f99;
+    }
+
+    #right {
+      width: 50%;
+      height: 100%;
+      background: #f96;
+    }
+
+    #video_area {
+      height: 381px;
+      background: #202020;
+      cursor: pointer;
+    }
+
+    #video {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+  <script>
+    require('./renderer.js')
+  </script>
+</body>
+
 </html>

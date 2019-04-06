@@ -16,7 +16,7 @@ function createWindow() {
   // 然后加载 app 的 index.html.
   win.loadFile('index.html')
   // 开发者工具
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
 }
 
 app.on('ready', () => {
