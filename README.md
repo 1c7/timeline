@@ -10,14 +10,12 @@ https://www.youtube.com/watch?v=tf06au731Ls
 ### 设计图(目标)
 ![app.jpg](./img/app.jpg)
 
-### 说明
-目标是做一个快捷键操作方便的，字幕时间轴编辑工具。     
+### 说明 (解决什么问题)
+一个字幕时间轴编辑工具。[详情说明请看博客](https://1c7.me/timeline-tools/)         
+重点：简单，好看，有夜间模式，快捷键操作方便。       
 
 ### 目标用户群
 字幕组
-
-### 详细说明
-请看博客: https://1c7.me/timeline-tools/   
 
 ### 废弃原因：
 视频 `<video>` tag 做不到 frame by frame 以及毫秒级控制。是 Web Standard 还不够造成的。
@@ -28,6 +26,8 @@ https://www.youtube.com/watch?v=tf06au731Ls
 
 ### 本地运行
 ```
+git clone https://github.com/1c7/timeline.git
+cd timeline
 npm install
 npm run start
 ```
