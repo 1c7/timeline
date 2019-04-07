@@ -18,22 +18,23 @@
         <video controls autoplay id='video' :src='video_src' v-if="show_video"></video>
       </div>
     </div>
-    <div id="right" v-on:click='choose_subtitle'>
+    <div id="right" v-on:click='choose_subtitle' v-bind:class="{ cursor: subtitle_array == null }">
       <div id="header">
-        <div class='header-cell h-line'>行</div>
+        <div class='header-cell h-content'>内容</div>
         <div class="h-seperate"></div>
         <div class='header-cell h-start'>开始时间</div>
         <div class="h-seperate"></div>
         <div class='header-cell h-end'>结束时间</div>
         <div class="h-seperate"></div>
-        <div class='header-cell h-content'>内容</div>
+        <div class='header-cell h-line'>行</div>
       </div>
       <div id='lines'>
-        <div v-bind:class="{ stripe: item.id % 2 == 0, line: true }" v-for='item in subtitle_array'>
-          <div class="l-number">{{item.id}}</div>
+        <div v-for='item in subtitle_array' v-on:click='choose_line(item)'
+          v-bind:class="{ stripe: item.id % 2 == 0, line: true, selected: selected_line == item.id }">
+          <div class="l-content">{{item.text}}</div>
           <div class="l-start">{{item.startTime}}</div>
           <div class="l-end">{{item.endTime}}</div>
-          <div class="l-content">{{item.text}}</div>
+          <div class="l-number">{{item.id}}</div>
         </div>
       </div>
     </div>
@@ -72,8 +73,11 @@
       width: 50%;
       height: 100%;
       background: #131313;
-      cursor: pointer;
       overflow: scroll;
+    }
+
+    .cursor {
+      cursor: pointer;
     }
 
     #video_area {
@@ -97,7 +101,6 @@
 
     .header-cell {
       display: flex;
-      justify-content: center;
       align-items: center;
     }
 
@@ -108,16 +111,18 @@
 
     .h-start {
       padding-left: 18px;
-      padding-right: 40px;
+      min-width: 110px;
     }
 
     .h-end {
       padding-left: 18px;
-      padding-right: 40px;
+      min-width: 110px;
     }
 
     .h-content {
       padding-left: 15px;
+      box-sizing: border-box;
+      width: 520px;
     }
 
     .h-seperate {
@@ -138,21 +143,24 @@
       align-items: center;
       font-size: 14px;
       font-family: 'Lato';
+      user-select: none;
+      border: 1px solid transparent;
+      box-sizing: border-box;
     }
 
     .l-number {
       box-sizing: border-box;
-      padding-left: 14px;
+      padding-right: 14px;
       width: 42px;
       /* background: red; */
-      /* text-align: center; */
       color: #848484;
+      text-align: right;
     }
 
     .l-start {
       box-sizing: border-box;
       padding-left: 18px;
-      width: 110px;
+      width: 128px;
       margin-left: 2px;
       color: #848484;
       /* background: rgb(255, 181, 181); */
@@ -160,7 +168,7 @@
 
     .l-end {
       box-sizing: border-box;
-      width: 110px;
+      width: 128px;
       margin-left: 2px;
       padding-left: 18px;
       color: #848484;
@@ -169,7 +177,6 @@
 
     .l-content {
       box-sizing: border-box;
-      margin-left: 2px;
       padding-left: 16px;
       /* background: rgb(204, 121, 121); */
       overflow: hidden;
@@ -177,10 +184,16 @@
       display: inherit;
       width: 470px;
       color: #ECECEC;
+      margin-right: 10px;
+      cursor: default;
     }
 
-    .line.stripe {
+    .stripe {
       background: #1E1E1E;
+    }
+
+    .selected {
+      border: 1px solid red;
     }
   </style>
   <script>
