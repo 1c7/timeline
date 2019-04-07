@@ -149,3 +149,44 @@ body {
   border: 1px solid red;
 }
 
+
+/* =============== */
+.video_bar{
+  color: white;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: 13px;
+  justify-content: center;
+  margin-top: 6px;
+}
+.play_bar{
+  width: 670px;
+  background: #464646;
+  height: 4px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+#play_button{
+  width: 15px;
+}
+
+.video_control{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.control_area{
+  color: #5B5B5B;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+}
+
+#play_button{
+  margin-right: 10px;
+}

@@ -1,7 +1,32 @@
 const { shell } = require('electron')
 const { dialog } = require('electron').remote
 const os = require('os')
-var parser = require('subtitles-parser');
+const parser = require('subtitles-parser');
+const hotkeys = require('hotkeys-js');
+
+hotkeys('f5', function(event, handler){
+  // Prevent the default refresh event under WINDOWS system
+  event.preventDefault() 
+  alert('you pressed F5!') 
+});
+
+hotkeys('ctrl+a,ctrl+b,r,f', function(event,handler) {
+  switch(handler.key){
+    case "ctrl+a":alert('you pressed ctrl+a!');break;
+    case "ctrl+b":alert('you pressed ctrl+b!');break;
+    case "r":alert('you pressed r!');break;
+    case "f":alert('you pressed f!');break;
+  }
+});
+
+hotkeys('space', function(event,handler) {
+  var el = app.$refs.video_element;
+  if (el.paused){
+    el.play();
+  }else{
+    el.pause();
+  }
+});
 
 var app = new Vue({
   el: '#container',
@@ -12,8 +37,38 @@ var app = new Vue({
     subtitle_file: null, // 字幕文件
     subtitle_array: null, // 字幕内容
     selected_line: null, // 已选中行
+    playing: false, //
   },
   created: function () {
+    // console.log(this.$refs);
+
+  },
+  mounted: function () {
+    var that = this;
+
+    this.$refs.video_element.addEventListener('loadeddata', (event) => {
+      console.log('Yay! The readyState just increased to  ' +
+        'HAVE_CURRENT_DATA or greater for the first time.');
+    });
+
+    this.$refs.video_element.addEventListener('play', (event) => {
+      console.log('开始播放');
+      that.playing = true;
+    });
+
+    this.$refs.video_element.addEventListener('pause', (event) => {
+      console.log('暂停');
+      that.playing = false;
+    });
+
+    this.$refs.video_element.addEventListener('ended', (event) => {
+      console.log('到达结尾');
+    });
+
+    this.$refs.video_element.addEventListener('ratechange', (event) => {
+      console.log('The playback rate changed.');
+    });
+    
   },
   methods: {
     choose() {
@@ -47,10 +102,16 @@ var app = new Vue({
       };
       reader.readAsText(file);
     },
-    choose_line(item){
+    choose_line(item) {
       // console.log(item);
       console.log(item.id);
       this.selected_line = item.id;
     },
+    play_pause() {
+      // console.log('asdasd');
+      // console.log(this.$refs.video_element)
+      // this.$refs.video_element.pause();
+      // this.$refs.video_element.play();
+    }
   }
 })

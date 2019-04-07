@@ -16,12 +16,19 @@
     <input type="file" style='display: none;' v-on:input='change_subtitle' ref="input_subtitle" />
     <div id="left">
       <div id='video_area' v-on:click='choose'>
-        <video id='video' :src='video_src' v-if="show_video"></video>
-        <!-- <video controls autoplay id='video' :src='video_src' v-if="show_video"></video> -->
+        <!-- 用 v-show 不用 v-if 否则 ref 引用会出问题 -->
+        <video id='video' :src='video_src' v-show="show_video" ref="video_element"></video>
+      </div>
+      <div class='video_bar'>
+        <div class='start_time'>00:00</div>
+        <div class='play_bar'></div>
+        <div class='end_time'>13:19</div>
       </div>
       <div class='video_control'>
-        <div class='start_time'>00:00</div>
-        <div class='end_time'>13:19</div>
+        <div class='control_area'>
+          <img :src="playing? './img/pause.png' : './img/play.png'" id='play_button' v-on:click='play_pause'>
+          <div>00:01:24:33</div>
+        </div>
       </div>
     </div>
     <div id="right" v-on:click='choose_subtitle' v-bind:class="{ cursor: subtitle_array == null }">
