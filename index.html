@@ -27,7 +27,7 @@
       <div class='video_control'>
         <div class='control_area'>
           <img :src="playing? './img/pause.png' : './img/play.png'" id='play_button' v-on:click='play_pause'>
-          <div>00:01:24:33</div>
+          <div class='time_code'>{{time}}</div>
         </div>
       </div>
     </div>

@@ -38,37 +38,40 @@ var app = new Vue({
     subtitle_array: null, // 字幕内容
     selected_line: null, // 已选中行
     playing: false, //
+    time: null, // 当前时间
   },
   created: function () {
     // console.log(this.$refs);
-
   },
   mounted: function () {
     var that = this;
-
-    this.$refs.video_element.addEventListener('loadeddata', (event) => {
+    var video = this.$refs.video_element;
+    video.addEventListener('loadeddata', (event) => {
       console.log('Yay! The readyState just increased to  ' +
         'HAVE_CURRENT_DATA or greater for the first time.');
     });
 
-    this.$refs.video_element.addEventListener('play', (event) => {
+    video.addEventListener('play', (event) => {
       console.log('开始播放');
       that.playing = true;
     });
 
-    this.$refs.video_element.addEventListener('pause', (event) => {
+    video.addEventListener('pause', (event) => {
       console.log('暂停');
       that.playing = false;
     });
 
-    this.$refs.video_element.addEventListener('ended', (event) => {
+    video.addEventListener('ended', (event) => {
       console.log('到达结尾');
     });
 
-    this.$refs.video_element.addEventListener('ratechange', (event) => {
+    video.addEventListener('ratechange', (event) => {
       console.log('The playback rate changed.');
     });
     
+    video.addEventListener('timeupdate', (event) => {
+      that.time = video.currentTime
+    });
   },
   methods: {
     choose() {

@@ -190,3 +190,7 @@ body {
 #play_button{
   margin-right: 10px;
 }
+
+.time_code{
+  width: 87px;
+}
