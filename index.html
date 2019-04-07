@@ -9,21 +9,33 @@
 </head>
 
 <body>
+
   <div id="container">
+    <input type="file" style='display: none;' v-on:input='change_video' ref="input_video" />
+    <input type="file" style='display: none;' v-on:input='change_subtitle' ref="input_subtitle" />
     <div id="left">
       <div id='video_area' v-on:click='choose'>
-        <input type="file" style='display: none;' v-on:input='change_video' ref="input_video" />
-        <input type="file" style='display: none;' v-on:input='change_subtitle' ref="input_subtitle" />
         <video controls autoplay id='video' :src='video_src' v-if="show_video"></video>
       </div>
     </div>
     <div id="right" v-on:click='choose_subtitle'>
-      <!-- <div id="header">
-        <div>行</div>
-        <div>开始时间</div>
-        <div>结束时间</div>
-        <div>内容</div>
-      </div> -->
+      <div id="header">
+        <div class='header-cell h-line'>行</div>
+        <div class="h-seperate"></div>
+        <div class='header-cell h-start'>开始时间</div>
+        <div class="h-seperate"></div>
+        <div class='header-cell h-end'>结束时间</div>
+        <div class="h-seperate"></div>
+        <div class='header-cell h-content'>内容</div>
+      </div>
+      <div id='lines'>
+        <div v-bind:class="{ stripe: item.id % 2 == 0, line: true }" v-for='item in subtitle_array'>
+          <div class="l-number">{{item.id}}</div>
+          <div class="l-start">{{item.startTime}}</div>
+          <div class="l-end">{{item.endTime}}</div>
+          <div class="l-content">{{item.text}}</div>
+        </div>
+      </div>
     </div>
   </div>
   <style>
@@ -40,7 +52,7 @@
     #open-file {
       width: 200px;
       height: 180px;
-      background: #f96;
+      background: #131313;
       cursor: pointer;
     }
 
@@ -53,19 +65,20 @@
     #left {
       width: 50%;
       height: 100%;
-      background: #f99;
+      background: #202020;
     }
 
     #right {
       width: 50%;
       height: 100%;
-      background: #f96;
+      background: #131313;
       cursor: pointer;
+      overflow: scroll;
     }
 
     #video_area {
       height: 381px;
-      background: #202020;
+      background: #2e2e2e;
       cursor: pointer;
     }
 
@@ -73,12 +86,101 @@
       height: 100%;
       width: 100%;
     }
-    #header{
+
+    #header {
       background: #373737;
       display: flex;
       color: #DFDFDF;
       font-size: 13px;
       height: 34px;
+    }
+
+    .header-cell {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .h-line {
+      padding-left: 14px;
+      padding-right: 15px;
+    }
+
+    .h-start {
+      padding-left: 18px;
+      padding-right: 40px;
+    }
+
+    .h-end {
+      padding-left: 18px;
+      padding-right: 40px;
+    }
+
+    .h-content {
+      padding-left: 15px;
+    }
+
+    .h-seperate {
+      width: 2px;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      background: #171717;
+      display: flex;
+    }
+
+    #lines {
+      color: white;
+    }
+
+    .line {
+      display: flex;
+      height: 38px;
+      align-items: center;
+      font-size: 14px;
+      font-family: 'Lato';
+    }
+
+    .l-number {
+      box-sizing: border-box;
+      padding-left: 14px;
+      width: 42px;
+      /* background: red; */
+      /* text-align: center; */
+      color: #848484;
+    }
+
+    .l-start {
+      box-sizing: border-box;
+      padding-left: 18px;
+      width: 110px;
+      margin-left: 2px;
+      color: #848484;
+      /* background: rgb(255, 181, 181); */
+    }
+
+    .l-end {
+      box-sizing: border-box;
+      width: 110px;
+      margin-left: 2px;
+      padding-left: 18px;
+      color: #848484;
+      /* background: rgb(185, 165, 165); */
+    }
+
+    .l-content {
+      box-sizing: border-box;
+      margin-left: 2px;
+      padding-left: 16px;
+      /* background: rgb(204, 121, 121); */
+      overflow: hidden;
+      white-space: nowrap;
+      display: inherit;
+      width: 470px;
+      color: #ECECEC;
+    }
+
+    .line.stripe {
+      background: #1E1E1E;
     }
   </style>
   <script>

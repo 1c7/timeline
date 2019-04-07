@@ -7,11 +7,11 @@ var app = new Vue({
   el: '#container',
   data: {
     a: 1,
-    show_video: false,
-    video_file: null,
-    video_src: null,
-    subtitle_file: null,
-    subtitle_array: [],
+    show_video: false, // 显示视频
+    video_file: null, // 视频文件
+    video_src: null, // 视频文件地址
+    subtitle_file: null, // 字幕文件
+    subtitle_array: null, // 字幕内容
   },
   created: function () {
     console.log('a is: ' + this.a)
@@ -25,6 +25,7 @@ var app = new Vue({
       }
     },
     change_video() {
+      console.log('不可能触发了这里啊?');
       this.video_file = this.$refs.input_video.files
       var file = this.video_file[0]
       var URL = window.URL || window.webkitURL
@@ -32,21 +33,24 @@ var app = new Vue({
       this.video_src = fileURL
       this.show_video = true
     },
-    choose_subtitle(){
-      this.$refs.input_subtitle.click();
+    choose_subtitle() {
+      if (this.subtitle_array == null) {
+        this.$refs.input_subtitle.click();
+      }
     },
-    change_subtitle(){
+    change_subtitle() {
       this.subtitle_file = this.$refs.input_subtitle.files
       var file = this.subtitle_file[0];
       // console.log(file);
-      
-      const reader = new FileReader(); 
-      reader.onload = function(e) {
+      var that = this;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
         var content = e.target.result;
         console.log(content);
         var data = parser.fromSrt(content);
         console.log(data);
-        this.subtitle_array = data;
+        that.subtitle_array = data;
       };
       reader.readAsText(file);
     }
