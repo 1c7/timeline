@@ -1,19 +1,26 @@
 ## 时间轴小助手
-说明：这是一个做到一半放弃掉的 Electron.js 项目。       
-目标是做一个快捷键操作方便的，字幕时间轴编辑工具。     
+说明：这是个做到一半放弃掉的 Electron.js 项目。       
 
-目标用户群：字幕组
+### 软件截图(做到一半)
+![half-built.jpg](./img/half-built.jpg)     
 
-详细说明请看博客: https://1c7.me/timeline-tools/   
-
-废弃原因：视频 `<video>` tag 做不到 frame by frame 以及毫秒级控制。是 Web Standard 还不够造成的。
-
-### 软件截图
-![half-built.jpg](./img/half-built.jpg)
-
-### 视频演示 (40秒整, 1080p)
+视频演示 (40秒整, 1080p)     
 https://www.youtube.com/watch?v=tf06au731Ls
 
+### 设计图(目标)
+![app.jpg](./img/app.jpg)
+
+### 说明
+目标是做一个快捷键操作方便的，字幕时间轴编辑工具。     
+
+### 目标用户群
+字幕组
+
+### 详细说明
+请看博客: https://1c7.me/timeline-tools/   
+
+### 废弃原因：
+视频 `<video>` tag 做不到 frame by frame 以及毫秒级控制。是 Web Standard 还不够造成的。
 
 ### 项目时间
 * 项目开始时间: 2019年4月6号
